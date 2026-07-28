@@ -1,4 +1,4 @@
-cd /app/darknet_ver
+cd ~
 gcc -Wall -O2 -Ilib/darknet/include -Ilib/darknet/src -Isrc \
     main.c src/util.c src/queue.c \
     $(printf 'lib/darknet/src/%s.c ' gemm utils cuda deconvolutional_layer convolutional_layer \
