@@ -8,9 +8,9 @@ apt install -y wget
 apt install -y gcc
 apt install -y htop
 
-mkdir ~/lib
-cd ~/lib
-git clone https://github.com/pjreddie/darknet.git
+# mkdir ~/lib
+# cd ~/lib
+# git clone https://github.com/pjreddie/darknet.git
 
 mkdir ~/model
 wget https://data.pjreddie.com/files/darknet19.weights
