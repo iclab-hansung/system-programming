@@ -54,11 +54,14 @@ void load_config(const char *path, Config *cfg)
         else if (strcmp(key, "model_cfg") == 0) snprintf(cfg->model_cfg, MAX_PATH_LEN, "%s", value);
         else if (strcmp(key, "model_weight") == 0) snprintf(cfg->model_weight, MAX_PATH_LEN, "%s", value);
         else if (strcmp(key, "data_dir") == 0) snprintf(cfg->data_dir, MAX_PATH_LEN, "%s", value);
+        else if (strcmp(key, "labels") == 0) snprintf(cfg->labels, MAX_PATH_LEN, "%s", value);
+        else if (strcmp(key, "synsets") == 0) snprintf(cfg->synsets, MAX_PATH_LEN, "%s", value);
     }
     fclose(fp);
 
     if (cfg->num_inferences <= 0 || cfg->num_threads <= 0 ||
-        !cfg->model_cfg[0] || !cfg->model_weight[0] || !cfg->data_dir[0]) {
+        !cfg->model_cfg[0] || !cfg->model_weight[0] || !cfg->data_dir[0] ||
+        !cfg->labels[0] || !cfg->synsets[0]) {
         fprintf(stderr, "config invalid/incomplete: %s\n", path);
         exit(1);
     }
@@ -110,4 +113,29 @@ int list_images(const char *dir, char ***out_paths)
 
     *out_paths = paths;
     return n;
+}
+
+static void basename_noext(const char *path, char *out, size_t outsize)
+{
+    const char *slash = strrchr(path, '/');
+    const char *base = slash ? slash + 1 : path;
+    const char *dot = strrchr(base, '.');
+    size_t len = dot ? (size_t)(dot - base) : strlen(base);
+    if (len >= outsize) len = outsize - 1;
+    memcpy(out, base, len);
+    out[len] = '\0';
+}
+
+int true_class_index(const char *image_path, char **synsets, int n_synsets)
+{
+    char base[MAX_PATH_LEN];
+    basename_noext(image_path, base, sizeof(base));
+
+    char *underscore = strchr(base, '_');
+    if (underscore) *underscore = '\0';
+
+    for (int i = 0; i < n_synsets; i++)
+        if (strcmp(base, synsets[i]) == 0) return i;
+
+    return -1;
 }
