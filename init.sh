@@ -1,16 +1,16 @@
 cd "$(dirname "$0")"
 
-apt update -y
-apt upgrade -y
+# apt update -y
+# apt upgrade -y
 
-apt install -y git
-apt install -y wget
-apt install -y gcc
-apt install -y htop
+# apt install -y git
+# apt install -y wget
+# apt install -y gcc
+# apt install -y htop
 
-# mkdir ~/lib
-# cd ~/lib
-# git clone https://github.com/pjreddie/darknet.git
+# # mkdir ~/lib
+# # cd ~/lib
+# # git clone https://github.com/pjreddie/darknet.git
 
 mkdir -p model
 cd model
