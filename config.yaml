@@ -1,14 +1,14 @@
-# num_inferences: 100
-# num_threads: 16
-# model_cfg: model/alexnet.cfg
-# model_weight: model/alexnet.weights
-# data_dir: data
+# num_inferences: 10 (추론 횟수, 1 이상의 정수)
+# num_threads: 1 (스레드 수, 1 이상의 정수)
+# model_cfg: model/alexnet.cfg (모델 설정 파일 경로, alexnet.cfg, darknet19.cfg, densenet201.cfg, resnet50.cfg, resnet152.cfg, vgg-16.cfg 등)
+# model_weight: model/alexnet.weights (모델 가중치 파일 경로, alexnet.weights, darknet19.weights, densenet201.weights, resnet50.weights, resnet152.weights, vgg-16.weights)
 
 
-num_inferences: 100
-num_threads: 8
+num_inferences: 10
+num_threads: 1
 model_cfg: model/vgg-16.cfg
 model_weight: model/vgg-16.weights
+
 data_dir: data
 labels: data/imagenet.shortnames.list
 synsets: data/imagenet.labels.list
